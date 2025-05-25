@@ -1,121 +1,244 @@
-Creative Commons Legal Code
+local SmileColor = Instance.new("ColorCorrectionEffect", game.Lighting)
+game.Debris:AddItem(SmileColor, 24) 
+SmileColor.Name = "SmileWarn" 
+SmileColor.TintColor = Color3.fromRGB(255, 0, 0)
+SmileColor.Saturation = 1
+SmileColor.Contrast = 1
 
-CC0 1.0 Universal
+game.TweenService:Create(SmileColor, TweenInfo.new(15), {
+    TintColor = Color3.fromRGB(255, 0, 0),
+    Saturation = 0,
+    Contrast = 0
+}):Play()
 
-    CREATIVE COMMONS CORPORATION IS NOT A LAW FIRM AND DOES NOT PROVIDE
-    LEGAL SERVICES. DISTRIBUTION OF THIS DOCUMENT DOES NOT CREATE AN
-    ATTORNEY-CLIENT RELATIONSHIP. CREATIVE COMMONS PROVIDES THIS
-    INFORMATION ON AN "AS-IS" BASIS. CREATIVE COMMONS MAKES NO WARRANTIES
-    REGARDING THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS
-    PROVIDED HEREUNDER, AND DISCLAIMS LIABILITY FOR DAMAGES RESULTING FROM
-    THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS PROVIDED
-    HEREUNDER.
+local spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Entity%20Spawner/V2/Source.lua"))()
+local entity = spawner.Create({
+	Entity = {
+		Name = "Hungered",
+		Asset = "rbxassetid://15104414692",
+		HeightOffset = 0
+	},
+	Lights = {
+		Flicker = {
+			Enabled = false,
+			Duration = 1
+		},
+		Shatter = false,
+		Repair = false
+	},
+	Earthquake = {
+		Enabled = false
+	},
+	CameraShake = {
+		Enabled = false,
+		Range = 100,
+		Values = {1.5, 20, 0.1, 1} -- Magnitude, Roughness, FadeIn, FadeOut
+	},
+	Movement = {
+		Speed = 200,
+		Delay = 8,
+		Reversed = false
+	},
+	Rebounding = {
+		Enabled = true,
+		Type = "Ambush", -- "Blitz"
+		Min = 1,
+		Max = math.random(2, 4),
+		Delay = 0
+	},
+	Damage = {
+		Enabled = true,
+		Range = 40,
+		Amount = 100
+	},
+	Crucifixion = {
+		Enabled = true,
+		Range = 40,
+		Resist = false,
+		Break = true
+	},
+	Death = {
+		Type = "Guiding", -- "Curious"
+		Hints = {"Death", "Hints", "Go", "Here"},
+		Cause = ""
+	}
+})
 
-Statement of Purpose
+---====== Debug entity ======---
 
-The laws of most jurisdictions throughout the world automatically confer
-exclusive Copyright and Related Rights (defined below) upon the creator
-and subsequent owner(s) (each and all, an "owner") of an original work of
-authorship and/or a database (each, a "Work").
+entity:SetCallback("OnSpawned", function()
 
-Certain owners wish to permanently relinquish those rights to a Work for
-the purpose of contributing to a commons of creative, cultural and
-scientific works ("Commons") that the public can reliably and without fear
-of later claims of infringement build upon, modify, incorporate in other
-works, reuse and redistribute as freely as possible in any form whatsoever
-and for any purposes, including without limitation commercial purposes.
-These owners may contribute to the Commons to promote the ideal of a free
-culture and the further production of creative, cultural and scientific
-works, or to gain reputation or greater distribution for their Work in
-part through the use and efforts of others.
+local entity = game.Workspace.Hungered:FindFirstChildWhichIsA("BasePart")
 
-For these and/or other purposes and motivations, and without any
-expectation of additional consideration or compensation, the person
-associating CC0 with a Work (the "Affirmer"), to the extent that he or she
-is an owner of Copyright and Related Rights in the Work, voluntarily
-elects to apply CC0 to the Work and publicly distribute the Work under its
-terms, with knowledge of his or her Copyright and Related Rights in the
-Work and the meaning and intended legal effect of CC0 on those rights.
+task.spawn(function()
+while true do wait(0)
+entity.Attachment.ParticleEmitter.Texture = "rbxassetid://91572395211151"
+wait(0)
+entity.Attachment.ParticleEmitter.Texture = "rbxassetid://87581800195800"
+wait(0)
+entity.Attachment.ParticleEmitter.Brightness = 10
+end
+end)
 
-1. Copyright and Related Rights. A Work made available under CC0 may be
-protected by copyright and related or neighboring rights ("Copyright and
-Related Rights"). Copyright and Related Rights include, but are not
-limited to, the following:
+local cue = Instance.new("Sound")
+	cue.Parent = game.Workspace.Hungered
+	cue.Name = "Spawn"
+	cue.SoundId = "rbxassetid://9125713308"
+	cue.Volume = 3
+	cue.PlaybackSpeed = 1
+	cue:Play()
+wait(1)
+local cue2 = Instance.new("Sound")
+	cue2.Parent = game.Workspace.Hungered
+	cue2.Name = "Spawn"
+	cue2.SoundId = "rbxassetid://9125712561"
+	cue2.Volume = 3
+	cue2.PlaybackSpeed = 1
+	cue2:Play()
+local cue2 = Instance.new("Sound")
+	cue2.Parent = game.Workspace.Hungered
+	cue2.Name = "Spawn"
+	cue2.SoundId = "rbxassetid://9114038247"
+	cue2.Volume = 2
+	cue2.PlaybackSpeed = 1
+	cue2:Play()
+local redtweeninfo = TweenInfo.new(8)
+local redinfo = {Color = Color3.new(100, 0, 0)}
+----------
+for i,v in pairs(workspace.CurrentRooms:GetDescendants()) do
+			if v:IsA("Light") then
+					game.TweenService:Create(v,redtweeninfo,redinfo):Play()
+					if v.Parent.Name == "LightFixture" then
+						    game.TweenService:Create(v.Parent,redtweeninfo,redinfo):Play()
+					end
+		  end
+end
 
-  i. the right to reproduce, adapt, distribute, perform, display,
-     communicate, and translate a Work;
- ii. moral rights retained by the original author(s) and/or performer(s);
-iii. publicity and privacy rights pertaining to a person's image or
-     likeness depicted in a Work;
- iv. rights protecting against unfair competition in regards to a Work,
-     subject to the limitations in paragraph 4(a), below;
-  v. rights protecting the extraction, dissemination, use and reuse of data
-     in a Work;
- vi. database rights (such as those arising under Directive 96/9/EC of the
-     European Parliament and of the Council of 11 March 1996 on the legal
-     protection of databases, and under any national implementation
-     thereof, including any amended or successor version of such
-     directive); and
-vii. other similar, equivalent or corresponding rights throughout the
-     world based on applicable law or treaty, and any national
-     implementations thereof.
+-- Camera shake
+local CameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camera = game.Workspace.CurrentCamera
+local camShake = CameraShaker.new(Enum.RenderPriority.Camera.Value, function(shakeCf)
+    camera.CFrame = camera.CFrame * shakeCf
+end)
 
-2. Waiver. To the greatest extent permitted by, but not in contravention
-of, applicable law, Affirmer hereby overtly, fully, permanently,
-irrevocably and unconditionally waives, abandons, and surrenders all of
-Affirmer's Copyright and Related Rights and associated claims and causes
-of action, whether now known or unknown (including existing as well as
-future claims and causes of action), in the Work (i) in all territories
-worldwide, (ii) for the maximum duration provided by applicable law or
-treaty (including future time extensions), (iii) in any current or future
-medium and for any number of copies, and (iv) for any purpose whatsoever,
-including without limitation commercial, advertising or promotional
-purposes (the "Waiver"). Affirmer makes the Waiver for the benefit of each
-member of the public at large and to the detriment of Affirmer's heirs and
-successors, fully intending that such Waiver shall not be subject to
-revocation, rescission, cancellation, termination, or any other legal or
-equitable action to disrupt the quiet enjoyment of the Work by the public
-as contemplated by Affirmer's express Statement of Purpose.
+camShake:Start()
+camShake:ShakeOnce(10, 3, 0.1, 6, 2, 0.5)
 
-3. Public License Fallback. Should any part of the Waiver for any reason
-be judged legally invalid or ineffective under applicable law, then the
-Waiver shall be preserved to the maximum extent permitted taking into
-account Affirmer's express Statement of Purpose. In addition, to the
-extent the Waiver is so judged Affirmer hereby grants to each affected
-person a royalty-free, non transferable, non sublicensable, non exclusive,
-irrevocable and unconditional license to exercise Affirmer's Copyright and
-Related Rights in the Work (i) in all territories worldwide, (ii) for the
-maximum duration provided by applicable law or treaty (including future
-time extensions), (iii) in any current or future medium and for any number
-of copies, and (iv) for any purpose whatsoever, including without
-limitation commercial, advertising or promotional purposes (the
-"License"). The License shall be deemed effective as of the date CC0 was
-applied by Affirmer to the Work. Should any part of the License for any
-reason be judged legally invalid or ineffective under applicable law, such
-partial invalidity or ineffectiveness shall not invalidate the remainder
-of the License, and in such case Affirmer hereby affirms that he or she
-will not (i) exercise any of his or her remaining Copyright and Related
-Rights in the Work or (ii) assert any associated claims and causes of
-action with respect to the Work, in either case contrary to Affirmer's
-express Statement of Purpose.
+end)
 
-4. Limitations and Disclaimers.
+entity:SetCallback("OnDespawning", function()
+game.Workspace.Hungered:Destroy()
+SmileColor:Destroy()
 
- a. No trademark or patent rights held by Affirmer are waived, abandoned,
-    surrendered, licensed or otherwise affected by this document.
- b. Affirmer offers the Work as-is and makes no representations or
-    warranties of any kind concerning the Work, express, implied,
-    statutory or otherwise, including without limitation warranties of
-    title, merchantability, fitness for a particular purpose, non
-    infringement, or the absence of latent or other defects, accuracy, or
-    the present or absence of errors, whether or not discoverable, all to
-    the greatest extent permissible under applicable law.
- c. Affirmer disclaims responsibility for clearing rights of other persons
-    that may apply to the Work or any use thereof, including without
-    limitation any person's Copyright and Related Rights in the Work.
-    Further, Affirmer disclaims responsibility for obtaining any necessary
-    consents, permissions or other rights required for any use of the
-    Work.
- d. Affirmer understands and acknowledges that Creative Commons is not a
-    party to this document and has no duty or obligation with respect to
-    this CC0 or use of the Work.
+local redtweeninfo = TweenInfo.new(1)
+local redinfo = {Color = Color3.new(255, 255, 255)}
+----------
+for i,v in pairs(workspace.CurrentRooms:GetDescendants()) do
+			if v:IsA("Light") then
+					game.TweenService:Create(v,redtweeninfo,redinfo):Play()
+					if v.Parent.Name == "LightFixture" then
+						    game.TweenService:Create(v.Parent,redtweeninfo,redinfo):Play()
+					end
+		  end
+end
+
+if game:GetService("ReplicatedStorage"):FindFirstChild("Hunger") then
+	return
+end
+
+local Test = Instance.new("Part")
+Test.Name = "Hunger"
+Test.Parent = game:GetService("ReplicatedStorage")
+
+---====== Load achievement giver ======---
+local achievementGiver = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Custom%20Achievements/Source.lua"))()
+ 
+---====== Display achievement ======---
+achievementGiver({
+    Title = "STOP CRY PLEASE",
+    Desc = "are you see that he a soul but hungry",
+    Reason = "Encounter Hungered",
+    Image = "rbxassetid://97793014212677"
+})
+end)
+
+entity:SetCallback("OnDamagePlayer", function(newHealth)
+	if newHealth == 0 then
+		print("Entity has killed the player")
+	else
+        game.Workspace.Hungered:Destroy()
+game.Players.LocalPlayer.Character.Humanoid:TakeDamage(100)
+game:GetService("ReplicatedStorage").GameStats["Player_".. game.Players.LocalPlayer.Name].Total.DeathCause.Value = "Hungered"
+
+        local shadow = game:GetObjects("rbxassetid://11503625408")[1]
+	local gui = Instance.new("ScreenGui",game.Players.LocalPlayer.PlayerGui)
+        local cue = Instance.new("Sound")
+    	cue.Parent = gui
+    	cue.Name = "Spawn"
+    	cue.SoundId = "rbxassetid://15704325502"
+    	cue.Volume = 1
+    	cue.PlaybackSpeed = 0.9
+    	cue:Play()
+			shadow.Parent = gui
+			shadow.Visible = true
+			local l__ImageLabel__1 = shadow.ImageLabel;
+			local v2 = Random.new();
+			local l__SizeValue__3 = shadow.SizeValue;
+			local v4 = math.random(1, 6);
+			if v4 == 1 then
+				l__ImageLabel__1.Image = "rbxassetid://87581800195800";
+			end;
+			if v4 == 2 then
+				l__ImageLabel__1.Image = "rbxassetid://87581800195800";
+			end;
+			if v4 == 3 then
+				l__ImageLabel__1.Image = "rbxassetid://87581800195800";
+			end;
+			if v4 == 4 then
+				l__ImageLabel__1.Image = "rbxassetid://87581800195800";
+			end;
+			if v4 == 5 then
+				l__ImageLabel__1.Image = "rbxassetid://87581800195800";
+			end;
+			if v4 == 6 then
+				l__ImageLabel__1.Image = "rbxassetid://87581800195800";
+			end;
+			shadow.Jumpscare:Play();
+			for v5 = 1, 25 do
+				local v6 = math.random(1, 3);
+				if v6 == 1 then
+					shadow.BackgroundColor3 = Color3.new(255, 0, 0);
+					l__ImageLabel__1.ImageColor3 = Color3.new(1, 1, 1);
+				end;
+				if v6 == 2 then
+					shadow.BackgroundColor3 = Color3.new(0, 0, 0);
+					l__ImageLabel__1.ImageColor3 = Color3.new(1, 0, 0);
+				end;
+				if v6 == 3 then
+					shadow.BackgroundColor3 = Color3.new(0, 0, 0);
+					l__ImageLabel__1.ImageColor3 = Color3.new(1, 1, 1);
+				end;
+				l__ImageLabel__1.Position = UDim2.new(v2:NextNumber(0.4, 0.6), 0, v2:NextNumber(0.45, 0.55), 0);
+				l__ImageLabel__1.Size = l__ImageLabel__1.Size + UDim2.new(l__SizeValue__3.Value, 0, l__SizeValue__3.Value, 0);
+				l__ImageLabel__1.Rotation = math.random(-50, 20);
+				l__SizeValue__3.Value = l__SizeValue__3.Value - 0.01;
+				wait(0);
+			end;
+			l__ImageLabel__1.ImageColor3 = Color3.new(0, 0, 0);
+			shadow.BackgroundColor3 = Color3.new(1, 1, 1);
+			game.TweenService:Create(shadow, TweenInfo.new(1), {BackgroundTransparency = 1}):Play()
+			game.TweenService:Create(l__ImageLabel__1, TweenInfo.new(1), {ImageTransparency = 1}):Play()
+			wait(1)
+			gui:Destroy()
+	end
+end)
+
+---====== Run entity ======---
+
+if not game.Workspace:FindFirstChild("SeekMovingNewClone") or 
+   latestRoom == 50 or latestRoom == 100 or 
+   (latestRoom >= 47 and latestRoom <= 51) or
+   (latestRoom >= 90 and latestRoom <= 100) or
+   (latestRoom >= 990 and latestRoom <= 1000) then
+    entity:Run()
+end
